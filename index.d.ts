@@ -262,17 +262,34 @@ declare module 'binance-api-node' {
 			endTime?: number
 			limit?: number
 		}): Promise<FundingRateResult[]>
-		futuresOrder(options: NewOrder): Promise<Order>
+		futuresOrder(options: NewFuturesOrder): Promise<FuturesOrder>
 		futuresCancelOrder(options: {
 			symbol: string
 			orderId: number
 			useServerTime?: boolean
-		}): Promise<CancelOrderResult>
+		}): Promise<CancelFuturesOrderResult>
+		futuresCancelOpenOrders(options: {
+			symbol: string
+			useServerTime?: boolean
+		}): Promise<CancelFuturesOrdersResult>
+		futuresAutoCancelOpenOrders(options: {
+			symbol: string
+			countdownTime: number
+			useServerTime?: boolean
+		}): Promise<FuturesAutoCancelOrdersResult>
 		futuresOpenOrders(options: {
 			symbol?: string
 			useServerTime?: boolean
-		}): Promise<QueryOrderResult>
-		futuresPositionRisk(options?: { recvWindow: number }): Promise<PositionRiskResult[]>
+		}): Promise<QueryFuturesOrderResult[]>
+		futuresPositionRisk(options?: {
+			symbol?: string
+			recvWindow?: number
+			useServerTime?: boolean
+		}): Promise<PositionRiskResult[]>
+		futuresAccountBalance(options: {
+			recvWindow?: number
+			useServerTime?: boolean
+		}): Promise<AccountBalanceResult>
 	}
 
 	export interface HttpError extends Error {
@@ -482,18 +499,39 @@ declare module 'binance-api-node' {
 	}
 
 	export interface NewOrder {
-		icebergQty?: string
-		newClientOrderId?: string
-		price?: string
-		quantity: string
-		recvWindow?: number
-		side: OrderSide
-		stopPrice?: string
 		symbol: string
-		timeInForce?: TimeInForce
-		useServerTime?: boolean
+		side: OrderSide
 		type: OrderType
+		timeInForce?: TimeInForce
+		quantity: string
+		quoteOrderQty?: string
+		price?: string
+		newClientOrderId?: string
+		stopPrice?: string
+		icebergQty?: string
 		newOrderRespType?: NewOrderRespType
+		recvWindow?: number
+		useServerTime?: boolean
+	}
+
+	export interface NewFuturesOrder {
+		symbol: string
+		side: OrderSide
+		type: OrderType
+		timeInForce?: TimeInForce
+		quantity: string
+		reduceOnly?: string
+		price?: string
+		newClientOrderId?: string
+		stopPrice?: string
+		closePosition?: string
+		activationPrice?: string
+		callbackRate?: string
+		workingType?: WorkingType
+		priceProtect?: string
+		newOrderRespType?: NewOrderRespType
+		recvWindow?: number
+		useServerTime?: boolean
 	}
 
 	export interface NewOcoOrder {
@@ -538,6 +576,32 @@ declare module 'binance-api-node' {
 		transactTime: number
 		type: OrderType
 		fills?: OrderFill[]
+	}
+
+	export interface FuturesOrder {
+		clientOrderId: string
+		cumQty: string
+		cumQuote: string
+		executedQty: string
+		orderId: number
+		avgPrice: string
+		origQty: string
+		price: string
+		reduceOnly: boolean,
+		side: string
+		positionSide: string
+		status: string
+		stopPrice: string
+		closePosition: boolean
+		symbol: string
+		timeInForce: string
+		type: string
+		origType: string
+		activatePrice: string
+		priceRate: string
+		updateTime: number
+		workingType: string
+		priceProtect: boolean
 	}
 
 	export interface OcoOrder {
@@ -597,6 +661,8 @@ declare module 'binance-api-node' {
 	}
 
 	export type ExecutionType = 'NEW' | 'CANCELED' | 'REPLACED' | 'REJECTED' | 'TRADE' | 'EXPIRED'
+
+	export type WorkingType = 'MARK_PRICE' | 'CONTRACT_PRICE'
 
 	export interface Depth {
 		eventType: string
@@ -835,11 +901,81 @@ declare module 'binance-api-node' {
 		updateTime: number
 	}
 
+	export interface QueryFuturesOrderResult {
+		avgPrice: string
+		clientOrderId: string
+		cumQuote: string
+		executedQty: string
+		orderId: number
+		origQty: string
+		origType: string
+		price: string
+		reduceOnly: boolean
+		side: string
+		positionSide: string
+		status: string
+		stopPrice: string
+		closePosition: boolean
+		symbol: string
+		time: number
+		timeInForce: string
+		type: string
+		activatePrice: string
+		priceRate: string
+		updateTime: number
+		workingType: string
+		priceProtect: boolean
+	}
+
 	export interface CancelOrderResult {
 		symbol: string
 		origClientOrderId: string
 		orderId: number
+		orderListId: number
 		clientOrderId: string
+		price: string
+		origQty: string
+		executedQty: string
+		cummulativeQuoteQty: string
+		status: string
+		timeInForce: string
+		type: string
+		side: string
+	}
+
+	export interface CancelFuturesOrderResult {
+		clientOrderId: string
+		cumQty: string
+		cumQuote: string
+		executedQty: string
+		orderId: number
+		origQty: string
+		origType: string
+		price: string
+		reduceOnly: boolean
+		side: string
+		positionSide: string
+		status: string
+		stopPrice: string
+		closePosition: boolean
+		symbol: string
+		timeInForce: string
+		type: string
+		activatePrice: string
+		priceRate: string
+		updateTime: number
+		workingType: string
+		priceProtect: boolean
+	}
+
+	export interface CancelFuturesOrdersResult {
+		code: string
+		msg: string
+	}
+
+	export interface FuturesAutoCancelOrdersResult {
+		symbol: string
+		countdownTime: string
 	}
 
 	export interface AvgPriceResult {
@@ -934,5 +1070,15 @@ declare module 'binance-api-node' {
 		symbol: string
 		unRealizedProfit: string
 		positionSide: string
+	}
+
+	export interface AccountBalanceResult {
+		accountAlias: string
+		asset: string
+		balance: string
+		crossWalletBalance: string
+		crossUnPnl: string
+		availableBalance: string
+		maxWithdrawAmount: string
 	}
 }
