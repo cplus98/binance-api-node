@@ -352,8 +352,9 @@ export default opts => {
 			checkParams('fundingRate', payload, ['symbol']) && pubCall('/fapi/v1/fundingRate', payload),
 
 		futuresOrder: payload => order(privCall, payload, '/fapi/v1/order'),
+		futuresGetOrder: payload => privCall('/fapi/v1/order', payload),
 		futuresCancelOrder: payload => privCall('/fapi/v1/order', payload, 'DELETE'),
-		futuresCancelOpenOrders: payload => privCall('/fapi/v1/allOpenOrders', payload),
+		futuresCancelOpenOrders: payload => privCall('/fapi/v1/allOpenOrders', payload, 'DELETE'),
 		futuresAutoCancelOpenOrders: payload => privCall('/fapi/v1/countdownCancelAll', payload),
 		futuresOpenOrders: payload => privCall('/fapi/v1/openOrders', payload),
 		futuresPositionRisk: payload => privCall('/fapi/v2/positionRisk', payload),
