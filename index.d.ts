@@ -295,6 +295,11 @@ declare module 'binance-api-node' {
 			recvWindow?: number
 			useServerTime?: boolean
 		}): Promise<AccountBalanceResult>
+		futuresUserCommissionRate(options: {
+			symbol: string
+			recvWindow?: number
+			useServerTime?: boolean
+		}): Promise<UserCommissionRateResult>
 	}
 
 	export interface HttpError extends Error {
@@ -1085,5 +1090,11 @@ declare module 'binance-api-node' {
 		crossUnPnl: string
 		availableBalance: string
 		maxWithdrawAmount: string
+	}
+
+	export interface UserCommissionRateResult {
+		symbol: string
+		makerCommissionRate: string
+		takerCommissionRate: string
 	}
 }
