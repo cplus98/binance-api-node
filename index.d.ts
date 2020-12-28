@@ -294,7 +294,7 @@ declare module 'binance-api-node' {
 		futuresAccountBalance(options: {
 			recvWindow?: number
 			useServerTime?: boolean
-		}): Promise<AccountBalanceResult>
+		}): Promise<AccountBalanceResult[]>
 		futuresUserCommissionRate(options: {
 			symbol: string
 			recvWindow?: number
