@@ -527,6 +527,7 @@ declare module 'binance-api-node' {
 	export interface NewFuturesOrder {
 		symbol: string
 		side: OrderSide
+		positionSide?: OrderPositionSide
 		type: OrderType
 		timeInForce?: TimeInForce
 		quantity: string
@@ -627,6 +628,8 @@ declare module 'binance-api-node' {
 	}
 
 	export type OrderSide = 'BUY' | 'SELL'
+
+	export type OrderPositionSide = 'BOTH' | 'LONG' | 'SHORT'
 
 	export type OrderStatus =
 		| 'CANCELED'
