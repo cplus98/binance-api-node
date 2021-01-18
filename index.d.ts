@@ -536,7 +536,6 @@ declare module 'binance-api-node' {
 		type: OrderType
 		timeInForce?: TimeInForce
 		quantity: string
-		reduceOnly?: string
 		price?: string
 		newClientOrderId?: string
 		stopPrice?: string
