@@ -304,7 +304,7 @@ declare module 'binance-api-node' {
 			dualSidePosition: 'true' | 'false'
 			recvWindow?: number
 			useServerTime?: boolean
-		}): Promise<UserCommissionRateResult>
+		}): Promise<SetHedgeModeResult>
 	}
 
 	export interface HttpError extends Error {
@@ -1104,5 +1104,10 @@ declare module 'binance-api-node' {
 		symbol: string
 		makerCommissionRate: string
 		takerCommissionRate: string
+	}
+
+	export interface SetHedgeModeResult {
+		code: number
+		msg: string
 	}
 }
