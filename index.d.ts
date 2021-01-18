@@ -300,6 +300,11 @@ declare module 'binance-api-node' {
 			recvWindow?: number
 			useServerTime?: boolean
 		}): Promise<UserCommissionRateResult>
+		futuresfuturesSetHedgeMode(options: {
+			dualSidePosition: 'true' | 'false'
+			recvWindow?: number
+			useServerTime?: boolean
+		}): Promise<UserCommissionRateResult>
 	}
 
 	export interface HttpError extends Error {
