@@ -1110,4 +1110,3 @@ export interface UserCommissionRateResult {
 	makerCommissionRate: string
 	takerCommissionRate: string
 }
-}
