@@ -354,6 +354,7 @@ export default opts => {
 		futuresOrder: payload => order(privCall, payload, '/fapi/v1/order'),
 		futuresGetOrder: payload => privCall('/fapi/v1/order', payload),
 		futuresCancelOrder: payload => privCall('/fapi/v1/order', payload, 'DELETE'),
+		futuresCancelOrders: payload => privCall('/fapi/v1/batchOrders', payload, 'DELETE'),
 		futuresCancelOpenOrders: payload => privCall('/fapi/v1/allOpenOrders', payload, 'DELETE'),
 		futuresAutoCancelOpenOrders: payload => privCall('/fapi/v1/countdownCancelAll', payload),
 		futuresOpenOrders: payload => privCall('/fapi/v1/openOrders', payload),

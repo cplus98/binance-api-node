@@ -273,6 +273,11 @@ declare module 'binance-api-node' {
 			orderId: number
 			useServerTime?: boolean
 		}): Promise<CancelFuturesOrderResult>
+		futuresCancelOrders(options: {
+			symbol: string
+			orderIdList: number[]
+			useServerTime?: boolean
+		}): Promise<(CancelFuturesOrderResult | CancelFuturesOrdersResult)[]>
 		futuresCancelOpenOrders(options: {
 			symbol: string
 			useServerTime?: boolean
@@ -984,124 +989,125 @@ declare module 'binance-api-node' {
 		workingType: string
 		priceProtect: boolean
 	}
+}
 
-	export interface CancelFuturesOrdersResult {
-		code: string
-		msg: string
-	}
+export interface CancelFuturesOrdersResult {
+	code: string
+	msg: string
+}
 
-	export interface FuturesAutoCancelOrdersResult {
-		symbol: string
-		countdownTime: string
-	}
+export interface FuturesAutoCancelOrdersResult {
+	symbol: string
+	countdownTime: string
+}
 
-	export interface AvgPriceResult {
-		mins: number
-		price: string
-	}
+export interface AvgPriceResult {
+	mins: number
+	price: string
+}
 
-	export interface DailyStatsResult {
-		symbol: string
-		priceChange: string
-		priceChangePercent: string
-		weightedAvgPrice: string
-		prevClosePrice: string
-		lastPrice: string
-		lastQty: string
-		bidPrice: string
-		bidQty: string
-		askPrice: string
-		askQty: string
-		openPrice: string
-		highPrice: string
-		lowPrice: string
-		volume: string
-		quoteVolume: string
-		openTime: number
-		closeTime: number
-		firstId: number // First tradeId
-		lastId: number // Last tradeId
-		count: number // Trade count
-	}
+export interface DailyStatsResult {
+	symbol: string
+	priceChange: string
+	priceChangePercent: string
+	weightedAvgPrice: string
+	prevClosePrice: string
+	lastPrice: string
+	lastQty: string
+	bidPrice: string
+	bidQty: string
+	askPrice: string
+	askQty: string
+	openPrice: string
+	highPrice: string
+	lowPrice: string
+	volume: string
+	quoteVolume: string
+	openTime: number
+	closeTime: number
+	firstId: number // First tradeId
+	lastId: number // Last tradeId
+	count: number // Trade count
+}
 
-	export interface CandlesOptions {
-		symbol: string
-		interval: CandleChartInterval
-		limit?: number
-		startTime?: number
-		endTime?: number
-	}
+export interface CandlesOptions {
+	symbol: string
+	interval: CandleChartInterval
+	limit?: number
+	startTime?: number
+	endTime?: number
+}
 
-	export interface CandleChartResult {
-		openTime: number
-		open: string
-		high: string
-		low: string
-		close: string
-		volume: string
-		closeTime: number
-		quoteVolume: string
-		trades: number
-		baseAssetVolume: string
-		quoteAssetVolume: string
-	}
+export interface CandleChartResult {
+	openTime: number
+	open: string
+	high: string
+	low: string
+	close: string
+	volume: string
+	closeTime: number
+	quoteVolume: string
+	trades: number
+	baseAssetVolume: string
+	quoteAssetVolume: string
+}
 
-	export interface MarkPriceResult {
-		symbol: string
-		markPrice: string
-		lastFundingRate: string
-		nextFundingTime: number
-		time: number
-	}
+export interface MarkPriceResult {
+	symbol: string
+	markPrice: string
+	lastFundingRate: string
+	nextFundingTime: number
+	time: number
+}
 
-	export interface AllForceOrdersResult {
-		symbol: string
-		price: string
-		origQty: string
-		executedQty: string
-		averagePrice: string
-		status: string
-		timeInForce: string
-		type: string
-		side: string
-		time: number
-	}
+export interface AllForceOrdersResult {
+	symbol: string
+	price: string
+	origQty: string
+	executedQty: string
+	averagePrice: string
+	status: string
+	timeInForce: string
+	type: string
+	side: string
+	time: number
+}
 
-	export interface FundingRateResult {
-		symbol: string
-		fundingRate: string
-		fundingTime: number
-		time: number
-	}
+export interface FundingRateResult {
+	symbol: string
+	fundingRate: string
+	fundingTime: number
+	time: number
+}
 
-	export interface PositionRiskResult {
-		entryPrice: string
-		marginType: string
-		isAutoAddMargin: string
-		isolatedMargin: string
-		leverage: string
-		liquidationPrice: string
-		markPrice: string
-		maxNotionalValue: string
-		positionAmt: string
-		symbol: string
-		unRealizedProfit: string
-		positionSide: string
-	}
+export interface PositionRiskResult {
+	entryPrice: string
+	marginType: string
+	isAutoAddMargin: string
+	isolatedMargin: string
+	leverage: string
+	liquidationPrice: string
+	markPrice: string
+	maxNotionalValue: string
+	positionAmt: string
+	symbol: string
+	unRealizedProfit: string
+	positionSide: string
+}
 
-	export interface AccountBalanceResult {
-		accountAlias: string
-		asset: string
-		balance: string
-		crossWalletBalance: string
-		crossUnPnl: string
-		availableBalance: string
-		maxWithdrawAmount: string
-	}
+export interface AccountBalanceResult {
+	accountAlias: string
+	asset: string
+	balance: string
+	crossWalletBalance: string
+	crossUnPnl: string
+	availableBalance: string
+	maxWithdrawAmount: string
+}
 
-	export interface UserCommissionRateResult {
-		symbol: string
-		makerCommissionRate: string
-		takerCommissionRate: string
-	}
+export interface UserCommissionRateResult {
+	symbol: string
+	makerCommissionRate: string
+	takerCommissionRate: string
+}
 }
