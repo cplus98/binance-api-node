@@ -277,7 +277,7 @@ declare module 'binance-api-node' {
 			symbol: string
 			orderIdList: number[]
 			useServerTime?: boolean
-		}): Promise<(CancelFuturesOrderResult | CancelFuturesOrdersResult)[]>
+		}): Promise<CancelFuturesBatchOrderResult>
 		futuresCancelOpenOrders(options: {
 			symbol: string
 			useServerTime?: boolean
@@ -990,6 +990,8 @@ declare module 'binance-api-node' {
 		priceProtect: boolean
 	}
 }
+
+type CancelFuturesBatchOrderResult = Array<CancelFuturesOrderResult | CancelFuturesOrdersResult>;
 
 export interface CancelFuturesOrdersResult {
 	code: string
