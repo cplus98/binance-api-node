@@ -275,7 +275,7 @@ declare module 'binance-api-node' {
 		}): Promise<CancelFuturesOrderResult>
 		futuresCancelOrders(options: {
 			symbol: string
-			orderIdList: number[]
+			orderIdList: string
 			useServerTime?: boolean
 		}): Promise<Array<CancelFuturesOrderResult | CancelFuturesOrdersResult>>
 		futuresCancelOpenOrders(options: {
